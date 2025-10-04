@@ -1,3 +1,6 @@
+const BPM = 120;
+setcpm(BPM/4)
+
 // Map Tempest drumpads
 let padToMidi = {
   A1: 67,  A2: 52,  A3: 41,  A4: 38,
