@@ -1,0 +1,38 @@
+const BPM = 120;
+setcpm(BPM/4)
+
+let padToMidi = {
+  A1: 67,  A2: 52,  A3: 41,  A4: 38,
+  A5: 46,  A6: 50,  A7: 47,  A8: 43,
+  A9: 77,  A10: 39, A11: 37, A12: 36,
+  A13: 42, A14: 51, A15: 49, A16: 55,
+
+  B1: 127, B2: 126, B3: 123, B4: 121,
+  B5: 120, B6: 125, B7: 118, B8: 122,
+  B9: 124, B10: 119, B11: 112, B12: 117,
+  B13: 115, B14: 116, B15: 111, B16: 114,
+};
+
+stack(
+  arrange(
+    [8, stack(
+      "A12 * 4",          //BD   
+      "- A3 - A3".early(.01),   
+      "- A13 - A13 - A13 - A13 ",  
+      //"A13*8 ".late(".5"),       
+      "[A15@12 - A15 - - A15] * 0.5 -"
+    )], 
+    
+    [2, stack(
+      "- A10 - A10".early(.01),   
+      "[- - A13]*4".late(0.2),  
+      "A13*8 ".late(".5"),       
+      "[A15@12 - A15 - - A15] * 0.5 -",
+   )]
+  
+  ).withValue(x => padToMidi[x]).note().midi('Strudel2BW', { midichannel: 12 }),
+  
+  stack(
+   note("<[c,eb,g]!2 [c,f,ab] [d,f,ab]>").arp("0 [0,2] 1 [0,2]").midi('Strudel2BW', { midichannel: 11 }),
+  )
+)          
