@@ -5,17 +5,10 @@
 ```bash
 pnpm build
 ```
-
-This creates an optimized production build of the web app under:
-
-```
-packages/app/dist/
-```
-
 You can then serve it with any static server:
 
 ```bash
-pnpm serve
+pnpm preview
 ```
 
 ---
@@ -36,15 +29,7 @@ This produces binaries under:
 desktop/dist/
 ```
 
-### **3. Make (package) desktop installer**
 
-```bash
-pnpm make
-```
-
-This step is used by Electron Forge to package the app for distribution.
-
----
 
 # 🧩 **Building individual parts of the monorepo**
 
@@ -109,15 +94,6 @@ cd strudel
 pnpm install
 pnpm build            # full web production build
 pnpm build:desktop    # optional desktop app
-pnpm make             # optional packaging step
 ```
 
----
 
-If you'd like, I can also provide:
-
-✅ A Windows-friendly build checklist
-✅ A script that automates the entire build process
-✅ Help with build errors (Vite, Electron, TypeScript, pnpm workspaces, etc.)
-
-Would you like any of those?
