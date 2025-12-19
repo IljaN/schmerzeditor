@@ -1,0 +1,41 @@
+setcpm(117/4)
+
+let tempestPads = {
+  A1: 67,  A2: 52,  A3: 41,  A4: 38,
+  A5: 46,  A6: 50,  A7: 47,  A8: 43,
+  A9: 77,  A10: 39, A11: 37, A12: 36,
+  A13: 42, A14: 51, A15: 49, A16: 55,
+
+  B1: 127, B2: 126, B3: 123, B4: 121,    
+  B5: 120, B6: 125, B7: 118, B8: 122,
+  B9: 124, B10: 119, B11: 112, B12: 117,
+  B13: 115, B14: 116, B15: 111, B16: 114,
+}
+
+$: stack(
+  "A12*4".early(0.2).sometimesBy(0.10, x => x.struct("t(3,8)")),
+  "A16*16".early(0.25),
+).withValue(x => tempestPads[x]).note().midi('Strudel2BW', { midichannel: 12})
+
+$: stack(
+    //s("circuitsdrumtracks_bd*4").sometimesBy(0.25, x => x.struct("t(3,8)")),
+  s("ace_hh*16").gain(0.7).swingBy(0.3, 8),
+  s("sakatadpm48_oh*2").struct("t(3,8)").lpf(sine.range(500, 14000)).swingBy(0.45, 8).gain(0.6),
+  s("sakatadpm48_cp*2").gain(0.9).sometimesBy(0.1, x => x.fast(2).gain(- 0.5)),
+   s("gm_woodblock*1").struct("t(5,16,17)").bpf(300).gain(2.8), 
+).gain(1.4).orbit(1).duckorbit("2:3").duckattack("<0.14, 0.03>").duckdepth(0.5)
+
+$: stack(
+   s("wt_digital_basique*4").note("g2 c2/2 g2").slow(4),
+   s("piano*32")
+  .bpf(1300).bpq("<1 2 5 7>")
+  .note("[g#2 a3*4] @[c3, c5]").fast(4)
+).gain(0.7).orbit(2)
+
+// DubStep
+$: s("wt_digital_curses*16")
+  .clip(19).fast(4)
+  .early(.50).fast(tri.range(-15, 20).slow(8)).gain(0.6).orbit(3)
+
+
+
